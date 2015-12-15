@@ -77,16 +77,20 @@ var SantaController = {
         SantaController.points=0;
     },
     clickElement : function(element){
-        SantaController.points+=SantaModel.pack(element);
-        SantaModel.next();
-        SantaView.clearQuestion();
-        var question = SantaModel.getCurrentRequest();
-        if(question){
-            SantaView.showQuestion(question);
+        if(SantaModel.pack(element)==0){
+            SantaController.points--;
+            alert("wrong answer");
         } else {
-            SantaView.showResults(SantaController.points);
+            SantaController.points++;
+            SantaModel.next();
+            SantaView.clearQuestion();
+            var question = SantaModel.getCurrentRequest();
+            if(question){
+                SantaView.showQuestion(question);
+            } else {
+                SantaView.showResults(SantaController.points);
+            }
         }
-
     }
 }
 
